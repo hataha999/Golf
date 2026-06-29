@@ -88,16 +88,17 @@
     .seg-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
     .par-section { margin-bottom: 0.75rem; }
-    .par-section-label { font-size: 0.72rem; color: var(--text3); margin-bottom: 0.4rem; font-weight: 600; }
-    .par-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 0.35rem; }
-    .par-cell { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
-    .par-hole-num { font-size: 0.6rem; color: var(--text3); font-weight: 700; }
+    .par-section-label { font-size: 0.72rem; color: var(--text3); margin-bottom: 0.5rem; font-weight: 600; }
+    .par-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.25rem; }
+    .par-grid { display: flex; gap: 0.5rem; width: max-content; }
+    .par-cell { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+    .par-hole-num { font-size: 0.7rem; color: var(--text3); font-weight: 700; }
     .par-input {
-      width: 2.1rem; height: 2.1rem; text-align: center; border: 1px solid var(--border);
-      border-radius: 6px; background: var(--bg); color: var(--text);
-      font-size: 0.9rem; font-weight: 700; -webkit-appearance: none; appearance: none; padding: 0;
+      width: 3rem; height: 3rem; text-align: center; border: 1.5px solid var(--border);
+      border-radius: 8px; background: var(--bg); color: var(--text);
+      font-size: 1.1rem; font-weight: 700; -webkit-appearance: none; appearance: none; padding: 0;
     }
-    .par-input:focus { outline: none; border-color: var(--accent); }
+    .par-input:focus { outline: none; border-color: var(--accent); background: var(--surface); }
 
     .player-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
     .player-item:last-child { border-bottom: none; }
@@ -121,40 +122,65 @@
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-danger { background: #fee2e2; color: var(--red); border: 1px solid #fecaca; }
 
-    /* Scorecard */
-    .scorecard-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .scorecard { border-collapse: collapse; font-size: 0.73rem; width: max-content; }
-    .scorecard th, .scorecard td {
-      border: 1px solid var(--border); padding: 0.3rem 0.35rem; text-align: center; white-space: nowrap;
-    }
-    .sc-name {
-      position: sticky; left: 0; background: var(--surface); z-index: 2;
-      text-align: left !important; min-width: 5rem; font-weight: 700;
-      padding-left: 0.5rem !important; border-right: 2px solid var(--border);
-    }
-    .sc-head { background: var(--surface2) !important; font-weight: 700; color: var(--text2); font-size: 0.7rem; }
-    .sc-name-head { position: sticky; left: 0; z-index: 3; }
-    .sc-par-row td { background: #f0fdf4; font-weight: 700; color: var(--accent); }
-    .sc-par-row .sc-name { background: #f0fdf4; color: var(--accent); }
-    .sc-sub { background: #f8fafc !important; font-weight: 700; color: var(--text2); border-left: 2px solid var(--border); border-right: 2px solid var(--border); }
-    .sc-tot { background: #fffbeb !important; font-weight: 700; color: var(--yellow); }
-    .sc-net { background: #eff6ff !important; font-weight: 700; color: var(--blue); }
-    .sc-vs { font-weight: 700; }
-
-    .sc-input {
-      width: 2rem; height: 1.7rem; text-align: center; border: 1px solid transparent;
-      border-radius: 4px; background: transparent; color: var(--text);
-      font-size: 0.82rem; font-weight: 700; -webkit-appearance: none; appearance: none; padding: 0; display: block; margin: 0 auto;
-    }
-    .sc-input:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+    /* Vertical Scorecard */
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-    .c-eagle { background: #fef08a !important; color: #713f12 !important; }
-    .c-birdie { background: #bfdbfe !important; color: #1e40af !important; }
-    .c-par { color: var(--text2); }
-    .c-bogey { color: var(--red); }
-    .c-double { background: #fee2e2 !important; color: var(--red); }
+    .scorecard-v { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .scorecard-v th, .scorecard-v td { border: 1px solid var(--border); text-align: center; vertical-align: middle; }
+    /* Fixed columns */
+    .vh-hole {
+      width: 2.8rem; min-width: 2.8rem; background: var(--surface2);
+      font-weight: 700; color: var(--text2); font-size: 0.75rem; padding: 0.4rem 0.2rem;
+    }
+    .vh-par {
+      width: 2.4rem; min-width: 2.4rem; background: #f0fdf4;
+      font-weight: 700; color: var(--accent); font-size: 0.85rem; padding: 0.4rem 0.2rem;
+    }
+    /* Player header */
+    .vp-head { font-weight: 700; font-size: 0.78rem; padding: 0.5rem 0.3rem; background: var(--surface2); }
+    /* Player data cell */
+    .vp-cell { padding: 0.25rem 0.2rem; min-width: 3.8rem; }
+    .vp-inner { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+    /* Score input */
+    .sc-score {
+      width: 2.8rem; height: 2.8rem; text-align: center;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      background: var(--bg); color: var(--text);
+      font-size: 1.1rem; font-weight: 700;
+      -webkit-appearance: none; appearance: none; padding: 0; display: block;
+    }
+    .sc-score:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+    /* Putt input */
+    .putt-row { display: flex; align-items: center; gap: 0.15rem; }
+    .sc-putt {
+      width: 2rem; height: 1.7rem; text-align: center;
+      border: 1px solid var(--border); border-radius: 5px;
+      background: transparent; color: var(--text2);
+      font-size: 0.75rem; font-weight: 600;
+      -webkit-appearance: none; appearance: none; padding: 0; display: block;
+    }
+    .sc-putt:focus { outline: none; border-color: var(--blue); }
+    .putt-lbl { font-size: 0.6rem; color: var(--text3); font-weight: 700; }
+    /* Subtotal rows */
+    .v-sub td { background: var(--surface2); font-weight: 700; font-size: 0.82rem; padding: 0.45rem 0.2rem; border-top: 2px solid var(--border); border-bottom: 2px solid var(--border); }
+    .v-sub .vh-hole { color: var(--text2); font-size: 0.72rem; }
+    .v-sub .vp-sub { font-weight: 700; color: var(--text); }
+    .v-tot td { background: #fffbeb; font-weight: 700; color: var(--yellow); padding: 0.45rem 0.2rem; }
+    .v-net td { background: #eff6ff; font-weight: 700; color: var(--blue); padding: 0.45rem 0.2rem; }
+    .v-vs td { font-weight: 700; padding: 0.45rem 0.2rem; }
+    .v-putt td { background: #f8fafc; color: var(--text2); font-size: 0.78rem; padding: 0.4rem 0.2rem; }
+    /* Score coloring on td */
+    .c-eagle { background: #fef08a !important; }
+    .c-eagle .sc-score, .c-eagle .v-score { color: #713f12 !important; font-weight: 800 !important; }
+    .c-birdie { background: #bfdbfe !important; }
+    .c-birdie .sc-score, .c-birdie .v-score { color: #1e40af !important; font-weight: 800 !important; }
+    .c-bogey .sc-score, .c-bogey .v-score { color: var(--red) !important; }
+    .c-double { background: #fee2e2 !important; }
+    .c-double .sc-score, .c-double .v-score { color: var(--red) !important; font-weight: 800 !important; }
+    /* Read-only score display */
+    .v-score { font-size: 1rem; font-weight: 700; }
+    .v-putt-disp { font-size: 0.7rem; color: var(--text3); }
 
     /* Results */
     .result-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -231,11 +257,11 @@
         <p class="section-label">パー設定</p>
         <div id="par-out-section" class="par-section">
           <div class="par-section-label">OUT（1〜9H）</div>
-          <div class="par-grid" id="par-out"></div>
+          <div class="par-scroll"><div class="par-grid" id="par-out"></div></div>
         </div>
         <div id="par-in-section" class="par-section">
           <div class="par-section-label">IN（10〜18H）</div>
-          <div class="par-grid" id="par-in"></div>
+          <div class="par-scroll"><div class="par-grid" id="par-in"></div></div>
         </div>
       </div>
 
@@ -259,11 +285,8 @@
       <h1 id="score-title">スコア入力</h1>
       <button class="header-btn" id="score-done">完了</button>
     </header>
-    <main style="padding:0.75rem 0.5rem;padding-bottom:3rem">
-      <div class="scorecard-wrap">
-        <table class="scorecard" id="scorecard"></table>
-      </div>
-      <p style="font-size:0.72rem;color:var(--text3);text-align:center;margin-top:0.75rem">← 横にスクロールできます →</p>
+    <main style="padding:0.5rem;padding-bottom:3rem">
+      <table class="scorecard-v" id="scorecard"></table>
     </main>
   </div>
 
@@ -475,9 +498,12 @@ function goScore() {
 
   const round = {
     id: genId(), date: ss.date, courseId: ss.courseId, course: ss.course,
-    type: ss.type, pars: [...ss.pars], players: [...ss.players], scores: {}
+    type: ss.type, pars: [...ss.pars], players: [...ss.players], scores: {}, putts: {}
   };
-  ss.players.forEach(p => { round.scores[p.name] = Array(18).fill(0); });
+  ss.players.forEach(p => {
+    round.scores[p.name] = Array(18).fill(0);
+    round.putts[p.name] = Array(18).fill(0);
+  });
   data.rounds.push(round);
   save(data);
 
@@ -487,84 +513,6 @@ function goScore() {
 }
 
 // ── SCORECARD ──
-function renderScorecard(round) {
-  document.getElementById('score-title').textContent = round.course;
-  document.getElementById('scorecard').innerHTML = buildCard(round, true);
-  document.getElementById('scorecard').querySelectorAll('.sc-input').forEach(inp => {
-    inp.addEventListener('input', () => {
-      flushInput(round.id);
-      colorCell(inp.parentElement, parseInt(inp.value)||0, round.pars[parseInt(inp.dataset.hole)-1]);
-    });
-    inp.addEventListener('focus', () => inp.select());
-  });
-}
-
-function buildCard(round, editable) {
-  const hn = holeNums(round.type);
-  const outs = hn.filter(h=>h<=9);
-  const ins = hn.filter(h=>h>9);
-  const hasOut = outs.length>0, hasIn = ins.length>0, hasTot = hasOut&&hasIn;
-
-  // Header
-  let h = '<thead><tr>';
-  h += `<th class="sc-head sc-name sc-name-head">名前</th>`;
-  outs.forEach(n => h += `<th class="sc-head">${n}</th>`);
-  if (hasOut) h += `<th class="sc-head sc-sub">OUT</th>`;
-  ins.forEach(n => h += `<th class="sc-head">${n}</th>`);
-  if (hasIn) h += `<th class="sc-head sc-sub">IN</th>`;
-  if (hasTot) h += `<th class="sc-head sc-tot">TOT</th>`;
-  h += `<th class="sc-head sc-net">NET</th><th class="sc-head sc-vs">±</th>`;
-  h += '</tr></thead><tbody>';
-
-  // PAR row
-  const op = outs.reduce((s,n)=>s+round.pars[n-1],0);
-  const ip = ins.reduce((s,n)=>s+round.pars[n-1],0);
-  const tp = op+ip;
-  h += '<tr class="sc-par-row">';
-  h += `<td class="sc-name">PAR</td>`;
-  outs.forEach(n => h += `<td>${round.pars[n-1]}</td>`);
-  if (hasOut) h += `<td class="sc-sub">${op}</td>`;
-  ins.forEach(n => h += `<td>${round.pars[n-1]}</td>`);
-  if (hasIn) h += `<td class="sc-sub">${ip}</td>`;
-  if (hasTot) h += `<td class="sc-tot">${tp}</td>`;
-  h += `<td class="sc-net">−</td><td class="sc-vs">−</td></tr>`;
-
-  // Player rows
-  round.players.forEach((p, pi) => {
-    const sc = round.scores[p.name] || Array(18).fill(0);
-    const os = outs.reduce((s,n)=>s+(sc[n-1]||0),0);
-    const is_ = ins.reduce((s,n)=>s+(sc[n-1]||0),0);
-    const ts = os+is_;
-    const net = ts > 0 ? ts - p.hcp : 0;
-    const vp = ts > 0 ? ts - tp : null;
-    const vpTxt = vp===null?'−':vp>0?`+${vp}`:vp===0?'E':`${vp}`;
-    const vpColor = vp===null?'':vp>0?'color:var(--red)':vp<0?'color:var(--accent)':'color:var(--text2)';
-
-    h += `<tr>`;
-    h += `<td class="sc-name">${esc(p.name)}<br><small style="color:var(--text3);font-size:0.6rem">HCP ${p.hcp}</small></td>`;
-
-    outs.forEach(n => {
-      const s = sc[n-1]||0, par = round.pars[n-1], cls = scoreClass(s,par);
-      if (editable) h += `<td class="${cls}"><input class="sc-input" type="number" min="1" max="20" value="${s||''}" data-player="${esc(p.name)}" data-hole="${n}" inputmode="numeric"></td>`;
-      else h += `<td class="${cls}">${s||'−'}</td>`;
-    });
-    if (hasOut) h += `<td class="sc-sub" id="out-${pi}">${os||'−'}</td>`;
-    ins.forEach(n => {
-      const s = sc[n-1]||0, par = round.pars[n-1], cls = scoreClass(s,par);
-      if (editable) h += `<td class="${cls}"><input class="sc-input" type="number" min="1" max="20" value="${s||''}" data-player="${esc(p.name)}" data-hole="${n}" inputmode="numeric"></td>`;
-      else h += `<td class="${cls}">${s||'−'}</td>`;
-    });
-    if (hasIn) h += `<td class="sc-sub" id="in-${pi}">${is_||'−'}</td>`;
-    if (hasTot) h += `<td class="sc-tot" id="tot-${pi}">${ts||'−'}</td>`;
-    h += `<td class="sc-net" id="net-${pi}">${ts>0?net:'−'}</td>`;
-    h += `<td class="sc-vs" id="vs-${pi}" style="${vpColor}">${vpTxt}</td>`;
-    h += `</tr>`;
-  });
-
-  h += '</tbody>';
-  return h;
-}
-
 function scoreClass(score, par) {
   if (!score) return '';
   const d = score - par;
@@ -575,8 +523,122 @@ function scoreClass(score, par) {
   return 'c-double';
 }
 
-function colorCell(td, score, par) {
-  td.className = scoreClass(score, par);
+function renderScorecard(round) {
+  document.getElementById('score-title').textContent = round.course;
+  const table = document.getElementById('scorecard');
+  table.className = 'scorecard-v';
+  table.innerHTML = buildCard(round, true);
+  table.querySelectorAll('.sc-score').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const td = inp.closest('td');
+      td.className = `vp-cell ${scoreClass(parseInt(inp.value)||0, round.pars[parseInt(inp.dataset.hole)-1])}`;
+      flushInput(round.id);
+    });
+    inp.addEventListener('focus', () => inp.select());
+  });
+  table.querySelectorAll('.sc-putt').forEach(inp => {
+    inp.addEventListener('input', () => flushInput(round.id));
+    inp.addEventListener('focus', () => inp.select());
+  });
+}
+
+function buildCard(round, editable) {
+  const hn = holeNums(round.type);
+  const outs = hn.filter(h=>h<=9), ins = hn.filter(h=>h>9);
+  const hasOut = outs.length>0, hasIn = ins.length>0, hasTot = hasOut&&hasIn;
+  const op = outs.reduce((s,h)=>s+round.pars[h-1],0);
+  const ip = ins.reduce((s,h)=>s+round.pars[h-1],0);
+  const tp = op+ip;
+
+  // Header
+  let html = '<thead><tr>';
+  html += '<th class="vh-hole">H</th><th class="vh-par">PAR</th>';
+  round.players.forEach(p => {
+    html += `<th class="vp-head">${esc(p.name)}<br><span style="font-size:0.65rem;color:var(--text3);font-weight:400">HCP ${p.hcp}</span></th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  // Single hole row
+  function holeRow(num) {
+    const par = round.pars[num-1];
+    let row = `<tr><td class="vh-hole">${num}</td><td class="vh-par">${par}</td>`;
+    round.players.forEach(p => {
+      const sc = (round.scores[p.name]||[])[num-1]||0;
+      const pt = (round.putts?.[p.name]||[])[num-1]||0;
+      const cls = scoreClass(sc, par);
+      if (editable) {
+        row += `<td class="vp-cell ${cls}"><div class="vp-inner">
+          <input class="sc-score" type="number" min="1" max="20" value="${sc||''}" data-player="${esc(p.name)}" data-hole="${num}" inputmode="numeric">
+          <div class="putt-row">
+            <input class="sc-putt" type="number" min="0" max="9" value="${pt||''}" data-player="${esc(p.name)}" data-hole="${num}" placeholder="−" inputmode="numeric">
+            <span class="putt-lbl">P</span>
+          </div>
+        </div></td>`;
+      } else {
+        row += `<td class="vp-cell ${cls}"><div class="vp-inner">
+          <div class="v-score">${sc||'−'}</div>
+          ${pt ? `<div class="v-putt-disp">${pt}P</div>` : ''}
+        </div></td>`;
+      }
+    });
+    row += '</tr>';
+    return row;
+  }
+
+  // Subtotal row
+  function subRow(label, holeList, parTot) {
+    let row = `<tr class="v-sub"><td class="vh-hole" colspan="2">${label}<br><span style="font-size:0.65rem">P${parTot}</span></td>`;
+    round.players.forEach((p, pi) => {
+      const sc = round.scores[p.name]||[];
+      const tot = holeList.reduce((s,h)=>s+(sc[h-1]||0),0);
+      row += `<td class="vp-sub" id="vsub-${label}-${pi}">${tot||'−'}</td>`;
+    });
+    return row + '</tr>';
+  }
+
+  outs.forEach(n => { html += holeRow(n); });
+  if (hasOut) html += subRow('OUT', outs, op);
+  ins.forEach(n => { html += holeRow(n); });
+  if (hasIn) html += subRow('IN', ins, ip);
+
+  // TOT
+  if (hasTot) {
+    let row = `<tr class="v-tot"><td class="vh-hole" colspan="2">TOT<br><span style="font-size:0.65rem">P${tp}</span></td>`;
+    round.players.forEach((p, pi) => {
+      const tot = hn.reduce((s,h)=>s+((round.scores[p.name]||[])[h-1]||0),0);
+      row += `<td id="vtot-${pi}">${tot||'−'}</td>`;
+    });
+    html += row + '</tr>';
+  }
+
+  // NET
+  let netRow = `<tr class="v-net"><td class="vh-hole" colspan="2">NET</td>`;
+  round.players.forEach((p, pi) => {
+    const tot = hn.reduce((s,h)=>s+((round.scores[p.name]||[])[h-1]||0),0);
+    netRow += `<td id="vnet-${pi}">${tot>0?tot-p.hcp:'−'}</td>`;
+  });
+  html += netRow + '</tr>';
+
+  // ±
+  let vsRow = `<tr class="v-vs"><td class="vh-hole" colspan="2">±</td>`;
+  round.players.forEach((p, pi) => {
+    const tot = hn.reduce((s,h)=>s+((round.scores[p.name]||[])[h-1]||0),0);
+    const vp = tot>0 ? tot-tp : null;
+    const vpTxt = vp===null?'−':vp>0?`+${vp}`:vp===0?'E':`${vp}`;
+    const vpC = vp===null?'':vp>0?'color:var(--red)':vp<0?'color:var(--accent)':'';
+    vsRow += `<td id="vvs-${pi}" style="${vpC}">${vpTxt}</td>`;
+  });
+  html += vsRow + '</tr>';
+
+  // Putt total
+  let puttRow = `<tr class="v-putt"><td class="vh-hole" colspan="2" style="font-size:0.7rem">パット<br>合計</td>`;
+  round.players.forEach((p, pi) => {
+    const tot = hn.reduce((s,h)=>s+((round.putts?.[p.name]||[])[h-1]||0),0);
+    puttRow += `<td id="vputt-${pi}">${tot||'−'}</td>`;
+  });
+  html += puttRow + '</tr>';
+
+  return html + '</tbody>';
 }
 
 function flushInput(roundId) {
@@ -589,14 +651,22 @@ function flushInput(roundId) {
   const hasOut = outs.length>0, hasIn = ins.length>0, hasTot = hasOut&&hasIn;
   const tp = hn.reduce((s,h)=>s+round.pars[h-1],0);
 
-  document.querySelectorAll('.sc-input').forEach(inp => {
+  document.querySelectorAll('.sc-score').forEach(inp => {
     const pn = inp.dataset.player, hole = parseInt(inp.dataset.hole);
     if (!round.scores[pn]) round.scores[pn] = Array(18).fill(0);
     round.scores[pn][hole-1] = parseInt(inp.value)||0;
   });
+  if (!round.putts) round.putts = {};
+  document.querySelectorAll('.sc-putt').forEach(inp => {
+    const pn = inp.dataset.player, hole = parseInt(inp.dataset.hole);
+    if (!round.putts[pn]) round.putts[pn] = Array(18).fill(0);
+    round.putts[pn][hole-1] = parseInt(inp.value)||0;
+  });
   save(data);
 
-  // Update totals
+  const set = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
+  const setStyle = (id, s) => { const el=document.getElementById(id); if(el) el.style.cssText=s; };
+
   round.players.forEach((p, pi) => {
     const sc = round.scores[p.name]||[];
     const os = outs.reduce((s,h)=>s+(sc[h-1]||0),0);
@@ -605,16 +675,14 @@ function flushInput(roundId) {
     const net = ts>0 ? ts-p.hcp : 0;
     const vp = ts>0 ? ts-tp : null;
     const vpTxt = vp===null?'−':vp>0?`+${vp}`:vp===0?'E':`${vp}`;
-    const vpColor = vp===null?'':vp>0?'color:var(--red)':vp<0?'color:var(--accent)':'color:var(--text2)';
-
-    const set = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
-    const setStyle = (id, style) => { const el=document.getElementById(id); if(el) el.style.cssText=style; };
-    if (hasOut) set(`out-${pi}`, os||'−');
-    if (hasIn) set(`in-${pi}`, is_||'−');
-    if (hasTot) set(`tot-${pi}`, ts||'−');
-    set(`net-${pi}`, ts>0?net:'−');
-    set(`vs-${pi}`, vpTxt);
-    setStyle(`vs-${pi}`, vpColor);
+    const vpC = vp===null?'':vp>0?'color:var(--red)':vp<0?'color:var(--accent)':'';
+    if (hasOut) set(`vsub-OUT-${pi}`, os||'−');
+    if (hasIn) set(`vsub-IN-${pi}`, is_||'−');
+    if (hasTot) set(`vtot-${pi}`, ts||'−');
+    set(`vnet-${pi}`, ts>0?net:'−');
+    set(`vvs-${pi}`, vpTxt); setStyle(`vvs-${pi}`, vpC);
+    const ptTot = hn.reduce((s,h)=>s+((round.putts?.[p.name]||[])[h-1]||0),0);
+    set(`vputt-${pi}`, ptTot||'−');
   });
 }
 
@@ -631,7 +699,8 @@ function showResult(roundId) {
   document.getElementById('result-title').textContent = round.course;
   document.getElementById('result-info').innerHTML = infoHTML(round, tp);
   document.getElementById('result-board').innerHTML = boardHTML(round, hn, tp);
-  document.getElementById('result-card').innerHTML = buildCard(round, false);
+  const rc = document.getElementById('result-card');
+  rc.className = 'scorecard-v'; rc.innerHTML = buildCard(round, false);
   goPage('result');
 }
 
@@ -648,11 +717,13 @@ function infoHTML(round, totPar) {
 function boardHTML(round, hn, tp) {
   const results = round.players.map(p => {
     const sc = round.scores[p.name]||[];
-    const gross = hn.map(h=>sc[h-1]||0).reduce((s,v)=>s+v,0);
-    return { name:p.name, hcp:p.hcp, gross, net:gross-p.hcp, vp:gross>0?gross-tp:null };
+    const pt = round.putts?.[p.name]||[];
+    const gross = hn.reduce((s,h)=>s+(sc[h-1]||0),0);
+    const putts = hn.reduce((s,h)=>s+(pt[h-1]||0),0);
+    return { name:p.name, hcp:p.hcp, gross, net:gross-p.hcp, vp:gross>0?gross-tp:null, putts };
   }).sort((a,b)=>a.net-b.net);
 
-  let h = `<thead><tr><th>名前</th><th>グロス</th><th>HCP</th><th>ネット</th><th>±</th></tr></thead><tbody>`;
+  let h = `<thead><tr><th>名前</th><th>グロス</th><th>HCP</th><th>ネット</th><th>±</th><th>パット</th></tr></thead><tbody>`;
   results.forEach((r,i) => {
     const vpTxt = r.vp===null?'−':r.vp>0?`+${r.vp}`:r.vp===0?'E':`${r.vp}`;
     const vpC = r.vp===null?'':r.vp>0?'color:var(--red)':r.vp<0?'color:var(--accent)':'';
@@ -661,6 +732,7 @@ function boardHTML(round, hn, tp) {
       <td>${r.gross||'−'}</td><td>${r.hcp}</td>
       <td style="font-weight:700;color:var(--blue)">${r.gross>0?r.net:'−'}</td>
       <td style="${vpC}">${vpTxt}</td>
+      <td style="color:var(--text2)">${r.putts||'−'}</td>
     </tr>`;
   });
   return h + '</tbody>';
@@ -672,7 +744,11 @@ function encodeShare(round) {
   const d = {
     n: round.course, d: round.date, t: round.type,
     p: hn.map(h=>round.pars[h-1]),
-    pl: round.players.map(p=>({ n:p.name, h:p.hcp, s:hn.map(h=>(round.scores[p.name]||[])[h-1]||0) }))
+    pl: round.players.map(p=>({
+      n:p.name, h:p.hcp,
+      s:hn.map(h=>(round.scores[p.name]||[])[h-1]||0),
+      pt:hn.map(h=>(round.putts?.[p.name]||[])[h-1]||0)
+    }))
   };
   return btoa(encodeURIComponent(JSON.stringify(d)));
 }
@@ -710,18 +786,20 @@ function showShareView(sd) {
   const pars = Array(18).fill(4);
   hn.forEach((h,i) => { pars[h-1] = sd.p[i]; });
   const players = sd.pl.map(p=>({name:p.n, hcp:p.h}));
-  const scores = {};
+  const scores = {}, putts = {};
   sd.pl.forEach(p => {
     scores[p.n] = Array(18).fill(0);
-    hn.forEach((h,i) => { scores[p.n][h-1] = p.s[i]; });
+    putts[p.n] = Array(18).fill(0);
+    hn.forEach((h,i) => { scores[p.n][h-1]=p.s[i]; if(p.pt) putts[p.n][h-1]=p.pt[i]||0; });
   });
-  const fakeRound = { course:sd.n, date:sd.d, type:sd.t, pars, players, scores };
+  const fakeRound = { course:sd.n, date:sd.d, type:sd.t, pars, players, scores, putts };
   const tp = sd.p.reduce((s,p)=>s+p,0);
 
   document.getElementById('share-title').textContent = sd.n;
   document.getElementById('share-info').innerHTML = infoHTML(fakeRound, tp);
   document.getElementById('share-board').innerHTML = boardHTML(fakeRound, hn, tp);
-  document.getElementById('share-card').innerHTML = buildCard(fakeRound, false);
+  const sc = document.getElementById('share-card');
+  sc.className = 'scorecard-v'; sc.innerHTML = buildCard(fakeRound, false);
   goPage('share');
 }
 
