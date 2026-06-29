@@ -8,6 +8,7 @@
   <meta name="apple-mobile-web-app-title" content="ゴルフ">
   <title>ゴルフスコア</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -374,7 +375,9 @@ function renderList() {
 
 // ── SETUP ──
 function startSetup() {
-  ss = { date: new Date().toISOString().slice(0,10), courseId:null, course:'', type:'all', pars:[...DEF_PARS], players:[] };
+  const _now = new Date();
+  const _today = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
+  ss = { date: _today, courseId:null, course:'', type:'all', pars:[...DEF_PARS], players:[] };
   renderSetup();
   goPage('setup');
 }
